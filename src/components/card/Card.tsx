@@ -1,13 +1,6 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  Pressable,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import React, {useState} from 'react';
-import Modal from 'react-native-modal';
+import ModalPopup from '../modal/ModalPopup';
 
 export default function Card(cardData: any) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -16,49 +9,13 @@ export default function Card(cardData: any) {
     <TouchableOpacity
       onPress={() => setModalVisible(true)}
       style={styles.cardContainer}>
-      <View style={styles.centeredView}>
-        <Modal backdropOpacity={0.8} isVisible={modalVisible}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Image
-                source={{uri: cardData.cardData.picture?.medium}}
-                style={styles.fullImageViewContainer}
-              />
-              <Text style={styles.nameContainer}>
-                Name: {cardData.cardData.name.title}{' '}
-                {cardData.cardData.name.first} {cardData.cardData.name.last}
-              </Text>
-              <Text style={styles.textContainer}>
-                UUID: {cardData.cardData.login.uuid}
-              </Text>
-              <Text style={styles.textContainer}>
-                Gender: {cardData.cardData.gender}
-              </Text>
-              <Text style={styles.textContainer}>
-                Age: {cardData.cardData.dob.age}
-              </Text>
-              <Text style={styles.textContainer}>
-                Phone No: {cardData.cardData.phone}
-              </Text>
-              <Text style={styles.textContainer}>
-                Email: {cardData.cardData.email}
-              </Text>
-
-              <Text style={styles.textContainer}>
-                Address: {cardData.cardData.location.city},{' '}
-                {cardData.cardData.location.state},{' '}
-                {cardData.cardData.location.country},{' '}
-                {cardData.cardData.location.postcode}
-              </Text>
-              <Pressable
-                style={styles.pressable}
-                onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={styles.textStyle}>x</Text>
-              </Pressable>
-            </View>
-          </View>
-        </Modal>
-      </View>
+      {modalVisible && (
+        <ModalPopup
+          cardData={cardData}
+          modalVisible={modalVisible}
+          handleModalVisible={() => setModalVisible(!modalVisible)}
+        />
+      )}
       <View style={styles.subContainer}>
         <Image
           source={{uri: cardData.cardData.picture?.medium}}

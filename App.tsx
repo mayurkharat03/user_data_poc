@@ -9,7 +9,7 @@ import React from 'react';
 import {SafeAreaView} from 'react-native';
 
 import Home from './src/screen/home/Home';
-import Header from './components/header/Header';
+import Header from './src/components/header/Header';
 
 function App(): JSX.Element {
   const backgroundStyle = {
